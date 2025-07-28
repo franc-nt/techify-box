@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techify Free Tools</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Techify Free Tools</h1>
+        <p class="subtitle">Painel de controle para seus serviços e ferramentas</p>
+        
+        <div class="info-cards">
+            <div class="info-card purple">
+                <div class="card-icon">📁</div>
+                <div class="card-content">
+                    <div class="card-title">Sub-domínio</div>
+                    <div class="card-value">
+                        <span id="subdomain">Carregando...</span>
+                        <button class="copy-btn" data-copy="subdomain" title="Copiar sub-domínio">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-card green">
+                <div class="card-icon">🔗</div>
+                <div class="card-content">
+                    <div class="card-title">Acesso Externo</div>
+                    <div class="card-value">
+                        <span id="external-url">Carregando...</span>
+                        <button class="copy-btn" data-copy="external-url" title="Copiar URL externa">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="status-container" class="status-info"></div>
+                </div>
+            </div>
+            
+            <div class="info-card blue">
+                <div class="card-icon">🛡️</div>
+                <div class="card-content">
+                    <div class="card-title">Definir Senha</div>
+                    <div class="card-action">
+                        <button id="btn-configure-password" class="config-btn">Configurar Senha</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="services-section">
+            <div class="services-header">
+                <h2>Serviços Disponíveis</h2>
+                <button id="toggle-passwords" class="toggle-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    Mostrar Senhas
+                </button>
+            </div>
+            
+            <div class="services-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>URL</th>
+                            <th>Usuário</th>
+                            <th>Senha</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="services-tbody">
+                        <!-- Services will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="timestamp" id="timestamp">Carregando...</div>
+    </div>
+
+    <!-- Configuration -->
+    <script src="js/config/constants.js"></script>
+    
+    <!-- Utilities -->
+    <script src="js/utils/dom.js"></script>
+    <script src="js/utils/storage.js"></script>
+    
+    <!-- Templates -->
+    <script src="js/templates/htmlTemplates.js"></script>
+    
+    <!-- Services -->
+    <script src="js/services/apiService.js"></script>
+    <script src="js/services/authService.js"></script>
+    
+    <!-- Main Application -->
+    <script src="js/app.js"></script>
+</body>
+</html>
