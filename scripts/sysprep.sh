@@ -140,9 +140,9 @@ update_coolify_domain() {
     # Construir novo FQDN
     local new_fqdn="https://coolify.${subdomain}.techify.free"
     local new_wildcard_domain="https://${subdomain}.techify.free"
-    local new_n8n_domain="https://n8n.${subdomain}.techify.free"
-    local new_evolution_domain="https://evolution.${subdomain}.techify.free"
-    local new_chatwoot_domain="https://atendimento.${subdomain}.techify.free"
+    local new_n8n_domain="https://n8n.${subdomain}.techify.free:5678"
+    local new_evolution_domain="https://evolution.${subdomain}.techify.free:8080"
+    local new_chatwoot_domain="https://atendimento.${subdomain}.techify.free:3000"
 
     # Obter FQDN atual do banco
     log "Verificando FQDN atual no banco de dados..."
@@ -168,9 +168,9 @@ update_coolify_domain() {
         docker exec coolify-db psql -U coolify -d coolify -c "UPDATE server_settings SET wildcard_domain = '$new_wildcard_domain';" > /dev/null 2>&1
         
         # Atualizar domínio do N8N,Evolution e Chatwoot
-        #docker exec coolify-db psql -U coolify -d coolify -c "UPDATE service_applications SET fqdn = '$new_n8n_domain' WHERE uuid = 'tkg4w4wcogssok8gs884w0sg';" > /dev/null 2>&1
+        docker exec coolify-db psql -U coolify -d coolify -c "UPDATE service_applications SET fqdn = '$new_n8n_domain' WHERE uuid = 'uw08kccw0kg4sgow4ggs0ksw';" > /dev/null 2>&1
         docker exec coolify-db psql -U coolify -d coolify -c "UPDATE service_applications SET fqdn = '$new_evolution_domain' WHERE uuid = 'tkg4w4wcogssok8gs884w0sg';" > /dev/null 2>&1
-        #docker exec coolify-db psql -U coolify -d coolify -c "UPDATE service_applications SET fqdn = '$new_chatwoot_domain' WHERE uuid = 'tkg4w4wcogssok8gs884w0sg';" > /dev/null 2>&1
+        docker exec coolify-db psql -U coolify -d coolify -c "UPDATE service_applications SET fqdn = '$new_chatwoot_domain' WHERE uuid = 'r8g0k8gggsgwo4cg08sowo00';" > /dev/null 2>&1
 
         if [[ $? -eq 0 ]]; then
             log "✓ Domínio atualizado no banco de dados"
@@ -187,6 +187,19 @@ update_coolify_domain() {
     # Reiniciar o Coolify (somente após rathole estar funcionando)
     log "Reiniciando containers do Coolify..."
     docker restart coolify coolify-proxy > /dev/null 2>&1
+    sleep 2
+    
+    #Reinicia serviço Evolution
+    curl 'http://127.0.0.1:8000/api/v1/services/m0wsog4s044kgkk0wg0cwccs/restart' --header 'Authorization: Bearer 1|sylOTlLLfpwDykOnyM6L1MgEvPBG75Ei1QrEE1c58c4b5eaa'
+    sleep 2
+
+    #Reinicia serviço Chatwoo
+    curl 'http://127.0.0.1:8000/api/v1/services/nc8okw0w0wwk8goow4c8w0ko/restart' --header 'Authorization: Bearer 1|sylOTlLLfpwDykOnyM6L1MgEvPBG75Ei1QrEE1c58c4b5eaa'
+    sleep 2
+
+    #Reinicia serviço N8N
+    curl 'http://127.0.0.1:8000/api/v1/services/to8wkw8c84og4og844gwo8cc/restart' --header 'Authorization: Bearer 1|sylOTlLLfpwDykOnyM6L1MgEvPBG75Ei1QrEE1c58c4b5eaa'
+
     
     if [[ $? -eq 0 ]]; then
         log "✓ Containers do Coolify reiniciados com sucesso"
