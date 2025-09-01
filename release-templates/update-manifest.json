@@ -1,0 +1,36 @@
+{
+  "version": "1.0.1",
+  "previous_version": "1.0.0",
+  "type": "minor",
+  "description": "Atualização menor com melhorias e correções",
+  "requires_restart": true,
+  "requires_npm_install": false,
+  "backup_required": true,
+  "pre_scripts": ["pre-update.sh"],
+  "post_scripts": ["post-update.sh"],
+  "files_to_update": [
+    "server/app.js",
+    "public/js/app.js",
+    "package.json"
+  ],
+  "files_to_preserve": [
+    "config.json",
+    "logs/",
+    "backups/",
+    "temp/",
+    "node_modules/"
+  ],
+  "minimum_disk_space_mb": 100,
+  "checksum": {
+    "algorithm": "sha256",
+    "files": "auto-generated"
+  },
+  "compatibility": {
+    "min_version": "1.0.0",
+    "max_version": null
+  },
+  "migration_notes": [
+    "Esta atualização adiciona sistema de versionamento automático",
+    "Nenhuma configuração manual necessária"
+  ]
+}
